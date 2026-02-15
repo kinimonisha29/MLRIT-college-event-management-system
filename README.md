@@ -1,22 +1,28 @@
 MLRIT College Event Management System
+
 A website I built for my college where students can register for events. Users can create accounts, login, and sign up for events. Admins can see all registrations in one dashboard.
+
 Built with HTML, CSS, JavaScript, Node.js, Express, and MongoDB.
-Folders: `/backend` (server code) and `/frontend` (webpages)
-To run: Install MongoDB, go to backend folder, run `npm install` then `node server.js`, open `http://localhost:3000`
+
+Folders: /backend (server code) and /frontend (webpages)
+
+To run: Install MongoDB, go to backend folder, run npm install then node server.js, open http://localhost:3000
+
 GitHub: kinimonisha29
+
 Here's how the website looks:
 
-Homepage – The main landing page where students start
+Homepage – The main landing page where students start  
 homepage.png
 
-Events Page – All upcoming college events listed here
+Events Page – All upcoming college events listed here  
 events.png
 
-Admin Dashboard – What admins see with all student registrations
+Admin Dashboard – What admins see with all student registrations  
 admin.png
 
-Login Page – Where students sign in to their accounts
+Login Page – Where students sign in to their accounts  
 login.png
 
-Registration Form – What students fill to sign up for events
+Registration Form – What students fill to sign up for events  
 registration.png
