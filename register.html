@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - MLRIT Events</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin:0;
+      background:#e0f7fa;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+
+    .form-container {
+      background:#ffffff;
+      width:360px;
+      padding:40px 30px;
+      border-radius:15px;
+      box-shadow:0 12px 25px rgba(0,0,0,0.1);
+      text-align:center;
+    }
+
+    h2 {
+      margin-bottom:30px;
+      font-size:28px;
+      color:#00796b;
+    }
+
+    form {
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      text-align:left;
+    }
+
+    .input-group {
+      position:relative;
+    }
+
+    .input-group input {
+      width:100%;
+      padding:14px 45px 14px 14px;
+      border:1px solid #ccc;
+      border-radius:10px;
+      font-size:15px;
+      transition:all 0.3s ease;
+      box-sizing:border-box;
+    }
+
+    .input-group input:focus {
+      border:2px solid #4dd0e1;
+      box-shadow:0 0 8px #4dd0e144;
+      outline:none;
+    }
+
+    .input-group span {
+      position:absolute;
+      right:12px;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:18px;
+      cursor:pointer;
+      color:#555;
+    }
+
+    button {
+      padding:15px;
+      background:#4dd0e1;
+      color:white;
+      border:none;
+      border-radius:10px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:all 0.3s ease;
+      width:100%;
+    }
+
+    button:hover {
+      background:#26c6da;
+      transform:translateY(-2px);
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    p {
+      margin-top:15px;
+      text-align:center;
+      font-size:14px;
+      color:#555;
+    }
+
+    a {
+      color:#00796b;
+      text-decoration:none;
+      font-weight:500;
+      cursor:pointer;
+    }
+
+    a:hover { text-decoration:underline; }
+
+    @media(max-width:480px){
+      .form-container{width:90%; padding:30px 20px;}
+      .input-group input{padding:12px 40px 12px 12px;font-size:14px;}
+      button{padding:12px; font-size:15px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>📝 Register</h2>
+    <form onsubmit="validateRegister(event)">
+      <div class="input-group">
+        <input type="text" id="username" placeholder="Username" required>
+        <span>👤</span>
+      </div>
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Email" required>
+        <span>📧</span>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password (min 6 chars)" required>
+        <span onclick="togglePassword('password', this)">👁️</span>
+      </div>
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+  </div>
+
+  <script>
+    async function validateRegister(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      
+      if (!username || !email || !password) {
+        alert("⚠️ Please fill all fields");
+        return false;
+      }
+      
+      if (password.length < 6) {
+        alert("⚠️ Password must be at least 6 characters");
+        return false;
+      }
+      
+      try {
+        console.log('Sending registration request...');
+        const response = await fetch('http://localhost:3000/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+        console.log('Server response:', data);
+        
+        if (data.success) {
+          localStorage.setItem('user', JSON.stringify(data.user));
+          alert("✅ Registration successful! You can now login.");
+          window.location.href = 'login.html';
+          return true;
+        } else {
+          alert("❌ " + (data.message || "Registration failed"));
+          return false;
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert("❌ Cannot connect to server. Make sure backend is running on port 3000");
+        return false;
+      }
+    }
+
+    function togglePassword(id, icon) {
+      const input = document.getElementById(id);
+      if (input.type === "password") {
+        input.type = "text";
+        icon.textContent = "🙈";
+      } else {
+        input.type = "password";
+        icon.textContent = "👁️";
+      }
+    }
+  </script>
+</body>
+</html>

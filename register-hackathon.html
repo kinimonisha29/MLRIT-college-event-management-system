@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Hackathon 2025</title>
+  <style>
+    body {font-family: Arial, sans-serif; background:#f8f9fa; margin:0; padding:0;}
+    header {background:#002147; color:white; text-align:center; padding:15px;}
+    .container {width:80%; max-width:600px; margin:30px auto; background:white; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+    h2 {color:#002147;}
+    label {display:block; margin:10px 0 5px; font-weight:bold;}
+    input, select, textarea {width:100%; padding:10px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px;}
+    button {background:#002147; color:white; border:none; padding:12px 20px; border-radius:6px; cursor:pointer; font-size:16px;}
+    button:hover {background:#0056b3;}
+    .back-links {margin-top:20px; text-align:center;}
+    .back-links a {margin:0 10px; text-decoration:none; color:#002147; font-weight:bold;}
+  </style>
+</head>
+<body>
+  <header><h1>Hackathon 2025 Registration</h1></header>
+  <div class="container">
+    <form action="success.html" method="post">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="roll">Roll Number:</label>
+      <input type="text" id="roll" name="roll" required>
+      <label for="dept">Department:</label>
+      <select id="dept" name="dept" required>
+        <option value="">Select Department</option>
+        <option>CSE</option><option>ECE</option><option>EEE</option><option>IT</option><option>Mechanical</option><option>Civil</option>
+      </select>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" required>
+      <input type="hidden" name="event" value="Hackathon 2025">
+      <button type="submit">Submit Registration</button>
+    </form>
+    <div class="back-links">
+      <a href="event-hackathon.html">← Back to Event</a>
+      <a href="events.html">← Back to Events</a>
+    </div>
+  </div>
+</body>
+</html>

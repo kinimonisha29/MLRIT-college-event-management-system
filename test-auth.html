@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Test Auth</h2>
+    <button onclick="register()">Test Register</button>
+    <button onclick="login()">Test Login</button>
+    <div id="result"></div>
+    
+    <script>
+        async function register() {
+            const res = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    username: 'testuser',
+                    email: 'test@mlrit.com',
+                    password: 'test123'
+                })
+            });
+            const data = await res.json();
+            document.getElementById('result').innerHTML = 
+                `Register: ${data.success ? '✅' : '❌'} ${data.message}`;
+        }
+        
+        async function login() {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email: 'test@mlrit.com',
+                    password: 'test123'
+                })
+            });
+            const data = await res.json();
+            document.getElementById('result').innerHTML = 
+                `Login: ${data.success ? '✅' : '❌'} ${data.message}`;
+        }
+    </script>
+</body>
+</html>

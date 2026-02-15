@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Research Symposium 2025</title>
+  <style>/* same styles as hackathon */</style>
+</head>
+<body>
+  <header><h1>Research Symposium 2025 Registration</h1></header>
+  <div class="container">
+    <form action="success.html" method="post">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="roll">Roll Number:</label>
+      <input type="text" id="roll" name="roll" required>
+      <label for="dept">Department:</label>
+      <select id="dept" name="dept" required>
+        <option value="">Select Department</option>
+        <option>CSE</option><option>ECE</option><option>EEE</option><option>IT</option><option>Mechanical</option><option>Civil</option>
+      </select>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" required>
+      <input type="hidden" name="event" value="Research Symposium 2025">
+      <button type="submit">Submit Registration</button>
+    </form>
+    <div class="back-links">
+      <a href="event-research.html">← Back to Event</a>
+      <a href="events.html">← Back to Events</a>
+    </div>
+  </div>
+</body>
+</html>

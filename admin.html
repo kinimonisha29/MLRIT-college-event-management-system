@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - MLRIT Events</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
+            color: #2c3e50;
+        }
+
+        .navbar {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar h1 {
+            font-size: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        select, button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .registrations-table {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        th {
+            background: #34495e;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .event-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-technofest { background: #e74c3c; color: white; }
+        .badge-alumni { background: #9b59b6; color: white; }
+        .badge-cultural { background: #27ae60; color: white; }
+        .badge-sports { background: #e67e22; color: white; }
+        .badge-hackathon { background: #3498db; color: white; }
+        .badge-research { background: #8e44ad; color: white; }
+        .badge-user_registration { background: #95a5a6; color: white; }
+
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: #7f8c8d;
+        }
+
+        .export-btn {
+            background: #27ae60;
+        }
+
+        .export-btn:hover {
+            background: #219a52;
+        }
+
+        .refresh-btn {
+            background: #3498db;
+        }
+
+        .refresh-btn:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>📊 MLRIT Events - Admin Dashboard</h1>
+        <div class="nav-links">
+            <a href="index.html">🏠 Home</a>
+            <a href="events.html">📅 Events</a>
+            <a href="#" onclick="refreshData()">🔄 Refresh</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h2>Event Registrations</h2>
+            <div>
+                <button class="export-btn" onclick="exportData()">📥 Export Data</button>
+                <button class="refresh-btn" onclick="refreshData()">🔄 Refresh</button>
+            </div>
+        </div>
+
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-number" id="totalRegistrations">0</div>
+                <div class="stat-label">Total Registrations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="technofestCount">0</div>
+                <div class="stat-label">TechnoFest</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="culturalCount">0</div>
+                <div class="stat-label">Cultural Fest</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="sportsCount">0</div>
+                <div class="stat-label">Sports Meet</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>Filter by Event:</label>
+                <select id="eventFilter" onchange="filterTable()">
+                    <option value="all">All Events</option>
+                    <option value="technofest">TechnoFest</option>
+                    <option value="cultural_fest">Cultural Fest</option>
+                    <option value="sports_meet">Sports Meet</option>
+                    <option value="alumni_meet">Alumni Meet</option>
+                    <option value="hackathon">Hackathon</option>
+                    <option value="research_conference">Research Conference</option>
+                    <option value="user_registration">User Registration</option>
+                </select>
+                
+                <label>Search:</label>
+                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search names, emails...">
+            </div>
+        </div>
+
+        <div class="registrations-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name/Team</th>
+                        <th>Email</th>
+                        <th>Event</th>
+                        <th>Details</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody id="registrationsTable">
+                    <tr>
+                        <td colspan="6" class="no-data">Loading registrations...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let allRegistrations = [];
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadRegistrations();
+        });
+
+        // Load registrations from API
+        async function loadRegistrations() {
+            try {
+                const response = await fetch('/api/registrations');
+                allRegistrations = await response.json();
+                updateStats();
+                renderTable(allRegistrations);
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('registrationsTable').innerHTML = 
+                    '<tr><td colspan="6" class="no-data">Error loading data. Please try again.</td></tr>';
+            }
+        }
+
+        // Update statistics
+        function updateStats() {
+            const total = allRegistrations.length;
+            const technofest = allRegistrations.filter(r => r.eventType === 'technofest').length;
+            const cultural = allRegistrations.filter(r => r.eventType === 'cultural_fest').length;
+            const sports = allRegistrations.filter(r => r.eventType === 'sports_meet').length;
+
+            document.getElementById('totalRegistrations').textContent = total;
+            document.getElementById('technofestCount').textContent = technofest;
+            document.getElementById('culturalCount').textContent = cultural;
+            document.getElementById('sportsCount').textContent = sports;
+        }
+
+        // Render table with data - FIXED VERSION
+        function renderTable(registrations) {
+            const tbody = document.getElementById('registrationsTable');
+            
+            if (registrations.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="no-data">No registrations found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = registrations.map((reg, index) => `
+                <tr>
+                    <td>${reg._id ? '#' + reg._id.toString().slice(-6) : 'REG-' + (index + 1)}</td>
+                    <td><strong>${reg.fullName || reg.teamName || reg.username || 'N/A'}</strong></td>
+                    <td>${reg.email || 'N/A'}</td>
+                    <td><span class="event-badge badge-${reg.eventType}">${getEventDisplayName(reg.eventType)}</span></td>
+                    <td>${getEventDetails(reg)}</td>
+                    <td>${new Date(reg.timestamp).toLocaleString()}</td>
+                </tr>
+            `).join('');
+        }
+
+        // IMPROVED: Get display name for event type with icons
+        function getEventDisplayName(eventType) {
+            const names = {
+                'technofest': '🎮 TechnoFest',
+                'cultural_fest': '🎭 Cultural Fest',
+                'sports_meet': '⚽ Sports Meet',
+                'alumni_meet': '🎓 Alumni Meet',
+                'hackathon': '💻 Hackathon',
+                'research_conference': '🔬 Research',
+                'user_registration': '👤 New User',
+                'technost': '🎮 TechnoFest',
+                'sports': '⚽ Sports Meet',
+                'alumni': '🎓 Alumni Meet',
+                'techfest': '🎮 TechnoFest',
+                'cultural': '🎭 Cultural Fest',
+                'user': '👤 User'
+            };
+            
+            // Convert to lowercase for matching
+            const key = String(eventType || '').toLowerCase();
+            return names[key] || (eventType ? eventType.charAt(0).toUpperCase() + eventType.slice(1) : 'Event');
+        }
+
+        // Get event-specific details
+        function getEventDetails(registration) {
+            // If there's department info, show it
+            if (registration.department) return `📚 ${registration.department}`;
+            if (registration.phone) return `📞 ${registration.phone}`;
+            if (registration.fullName) return `👤 ${registration.fullName}`;
+            
+            // Check eventData
+            const data = registration.eventData || {};
+            if (data.department) return `📚 ${data.department}`;
+            if (data.phone) return `📞 ${data.phone}`;
+            
+            return '📝 Registered';
+        }
+
+        // Filter table based on selections
+        function filterTable() {
+            const eventFilter = document.getElementById('eventFilter').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            let filtered = allRegistrations;
+
+            // Filter by event type
+            if (eventFilter !== 'all') {
+                filtered = filtered.filter(reg => {
+                    const regType = (reg.eventType || '').toLowerCase();
+                    return regType === eventFilter.toLowerCase();
+                });
+            }
+
+            // Filter by search term
+            if (searchTerm) {
+                filtered = filtered.filter(reg => 
+                    (reg.fullName && reg.fullName.toLowerCase().includes(searchTerm)) ||
+                    (reg.email && reg.email.toLowerCase().includes(searchTerm)) ||
+                    (reg.teamName && reg.teamName.toLowerCase().includes(searchTerm)) ||
+                    (reg.username && reg.username.toLowerCase().includes(searchTerm))
+                );
+            }
+
+            renderTable(filtered);
+        }
+
+        // Refresh data
+        function refreshData() {
+            loadRegistrations();
+        }
+
+        // Export data as JSON
+        function exportData() {
+            const dataStr = JSON.stringify(allRegistrations, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `mlrit-registrations-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+        }
+    </script>
+</body>
+</html>

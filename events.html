@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLRIT - Events 2026</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background: #002147;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 5px 0;
+      font-size: 28px;
+    }
+    header h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 20px;
+      color: #dcdcdc;
+    }
+
+    /* Navbar */
+    nav {
+      margin-bottom: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+      color: #f4d03f;
+    }
+
+    /* Container */
+    .container {
+      width: 90%;
+      margin: 30px auto;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-size: 24px;
+      color: #002147;
+      border-left: 5px solid #0056b3;
+      padding-left: 10px;
+    }
+
+    /* Event Cards */
+    .event-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+    .event-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+    }
+    .event-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .event-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .event-card h3 {
+      margin: 15px 15px 5px;
+      color: #002147;
+    }
+    .event-card p {
+      margin: 5px 15px;
+      color: #555;
+      font-size: 14px;
+    }
+    
+    /* Status badges */
+    .status {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      margin: 10px 15px 0;
+    }
+    .status.upcoming {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+    .status.completed {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+    .status.ongoing {
+      background-color: #e3f2fd;
+      color: #1565c0;
+    }
+
+    /* Links */
+    .links {
+      margin: 15px;
+    }
+    .links a {
+      display: inline-block;
+      margin: 5px 8px 0 0;
+      padding: 8px 14px;
+      background: #002147;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+    .links a:hover {
+      background: #0056b3;
+    }
+    .links a[style*="pointer-events:none"] {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 50px;
+      padding: 20px;
+      text-align: center;
+      background: #002147;
+      color: white;
+      font-size: 14px;
+    }
+    
+    /* Date indicator */
+    .today-indicator {
+      background-color: #ff5252;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">🏠 Home</a>
+      <a href="events.html">📅 Events</a>
+      <a href="login.html">🔐 Login</a>
+      <a href="register.html">📝 Register</a>
+    </nav>
+    <h1>MLR Institute of Technology</h1>
+    <h2>Upcoming Events 2026</h2>
+  </header>
+  
+  <!-- Upcoming Events -->
+  <div class="container">
+    <h2>🎯 Upcoming Events</h2>
+    <div class="event-list">
+
+      <div class="event-card">
+        <div class="today-indicator">🔥 Featured</div>
+        <img src="technofest.png" alt="TechnoFest">
+        <h3>TechnoFest 2026</h3>
+        <p><strong>📅 Date:</strong> 14th October 2026</p>
+        <p><strong>📍 Venue:</strong> Auditorium - Block A</p>
+        <p>National-level technical symposium with hackathons, paper presentations, and robotics.</p>
+        <span class="status upcoming">Upcoming</span>
+        <div class="links">
+          <a href="event-technoFest.html">View Details</a>
+          <a href="event-technoFest.html">Register</a>
+          <a href="index.html">Back to Home</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="innovationexpo.jpeg" alt="Innovation Expo">
+        <h3>Innovation Expo 2026</h3>
+        <p><strong>📅 Date:</strong> 18th October 2026</p>
+        <p><strong>📍 Venue:</strong> Innovation Lab - Block B</p>
+        <p>Showcase of student projects, prototypes, and startups with industry mentors.</p>
+        <span class="status upcoming">Upcoming</span>
+        <div class="links">
+          <a href="event-induction.html">View Details</a>
+          <a href="event-induction.html">Register</a>
+          <a href="index.html">Back to Home</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="sportsmeet.jpeg" alt="Sports Meet">
+        <h3>Annual Sports Meet 2026</h3>
+        <p><strong>📅 Date:</strong> 22nd-24th October 2026</p>
+        <p><strong>📍 Venue:</strong> College Grounds</p>
+        <p>A week-long celebration of athletic spirit with track, field, indoor, and outdoor sports competitions.</p>
+        <span class="status upcoming">Upcoming</span>
+        <div class="links">
+          <a href="event-sports.html">View Details</a>
+          <a href="event-sports.html">Register</a>
+          <a href="index.html">Back to Home</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="alumni2025.jpeg" alt="Alumni Meet">
+        <h3>Alumni Meet 2026</h3>
+        <p><strong>📅 Date:</strong> 28th October 2026</p>
+        <p><strong>📍 Venue:</strong> Seminar Hall - Block C</p>
+        <p>Reconnect with alumni, share experiences, and strengthen the institution's legacy.</p>
+        <span class="status upcoming">Upcoming</span>
+        <div class="links">
+          <a href="event-alumni.html">View Details</a>
+          <a href="event-alumni.html">Register</a>
+          <a href="index.html">Back to Home</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="aimlworkshop.jpeg" alt="AI & ML Workshop">
+        <h3>Workshop on AI & ML</h3>
+        <p><strong>📅 Date:</strong> 5th November 2026</p>
+        <p><strong>📍 Venue:</strong> Computer Science Lab</p>
+        <p>Hands-on workshop introducing Artificial Intelligence and Machine Learning concepts with practical projects.</p>
+        <span class="status upcoming">Upcoming</span>
+        <div class="links">
+          <a href="event-aiml.html">View Details</a>
+          <a href="register-aiml.html">Register</a>
+          <a href="index.html">Back to Home</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="sciencefair.jpeg" alt="Science Fair">
+        <h3>Science Fair 2026</h3>
+        <p><strong>📅 Date:</strong> 12th November 2026</p>
+        <p><strong>📍 Venue:</strong> Exhibition Hall</p>
+        <p>Students showcase innovative projects, experiments, and models to inspire scientific thinking.</p>
+        <span class="status upcoming">Upcoming</span>
+        <div class="links">
+          <a href="event-cultural.html">View Details</a>
+          <a href="event-cultural.html">Register</a>
+          <a href="index.html">Back to Home</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="entrepreneurship.jpeg" alt="Entrepreneurship Summit">
+        <h3>Entrepreneurship Summit 2026</h3>
+        <p><strong>📅 Date:</strong> 20th November 2026</p>
+        <p><strong>📍 Venue:</strong> Convention Center</p>
+        <p>A summit for aspiring entrepreneurs with keynote speeches, startup pitches, and networking opportunities.</p>
+        <span class="status upcoming">Upcoming</span>
+        <div class="links">
+          <a href="event-entrepreneurship.html">View Details</a>
+          <a href="register-entrepreneurship.html">Register</a>
+          <a href="index.html">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Completed Events -->
+  <div class="container">
+    <h2>✅ Completed Events</h2>
+    <div class="event-list">
+
+      <div class="event-card">
+        <img src="graduation.jpeg" alt="Graduation Day">
+        <h3>Graduation Ceremony</h3>
+        <p><strong>📅 Date:</strong> 30th September 2026</p>
+        <p><strong>📍 Venue:</strong> Main Auditorium</p>
+        <p>A proud moment for final year students with awards, certificates, and farewells.</p>
+        <span class="status completed">Completed</span>
+        <div class="links">
+          <a href="highlights.html">View Highlights</a>
+          <a style="pointer-events:none;">Register</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="culturalday.jpeg" alt="Cultural Day">
+        <h3>Cultural Fest - Spandana</h3>
+        <p><strong>📅 Date:</strong> 5th October 2026</p>
+        <p><strong>📍 Venue:</strong> Open Air Stage</p>
+        <p>A vibrant night with music, dance, drama, and art competitions.</p>
+        <span class="status completed">Completed</span>
+        <div class="links">
+          <a href="highlights.html">View Highlights</a>
+          <a style="pointer-events:none;">Register</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="traditionalday.jpeg" alt="Traditional Day">
+        <h3>Traditional Day</h3>
+        <p><strong>📅 Date:</strong> 8th October 2026</p>
+        <p><strong>📍 Venue:</strong> College Premises</p>
+        <p>A colorful day where students celebrate cultural attire and traditions.</p>
+        <span class="status completed">Completed</span>
+        <div class="links">
+          <a href="highlights.html">View Highlights</a>
+          <a style="pointer-events:none;">Register</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="kitefest.jpeg" alt="Kite Festival">
+        <h3>Kite Festival</h3>
+        <p><strong>📅 Date:</strong> 12th October 2026</p>
+        <p><strong>📍 Venue:</strong> Playground</p>
+        <p>A fun-filled festival with kite flying competitions, snacks, and celebrations.</p>
+        <span class="status completed">Completed</span>
+        <div class="links">
+          <a href="highlights.html">View Highlights</a>
+          <a style="pointer-events:none;">Register</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 MLR Institute of Technology | All Rights Reserved</p>
+    <p style="font-size: 12px; margin-top: 10px;">📍 Hyderabad, India | 📧 events@mlrit.ac.in</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Innovation Expo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.95);
+      width: 500px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      text-align: center;
+      color: #27ae60;
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #34495e;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+      background: #f8f9fa;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #27ae60;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #27ae60;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .project-type {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .project-option {
+      padding: 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .project-option.selected {
+      border-color: #27ae60;
+      background: #27ae60;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Register for Innovation Expo 2025</h2>
+    <form id="innovationForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="fullName" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" name="phone" required>
+      </div>
+
+      <div class="form-group">
+        <label>Department</label>
+        <input type="text" name="department" required>
+      </div>
+
+      <div class="form-group">
+        <label>Year of Study</label>
+        <select name="year" required>
+          <option value="">Select Year</option>
+          <option value="1">1st Year</option>
+          <option value="2">2nd Year</option>
+          <option value="3">3rd Year</option>
+          <option value="4">4th Year</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Project Category</label>
+        <select name="projectCategory" required>
+          <option value="">Select Category</option>
+          <option value="tech_innovation">Technology Innovation</option>
+          <option value="social_impact">Social Impact</option>
+          <option value="sustainable_tech">Sustainable Technology</option>
+          <option value="healthcare">Healthcare Innovation</option>
+          <option value="education_tech">Education Technology</option>
+          <option value="iot">Internet of Things</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Project Title</label>
+        <input type="text" name="projectTitle" placeholder="Name of your innovation project" required>
+      </div>
+
+      <div class="form-group">
+        <label>Team Size</label>
+        <select name="teamSize" required>
+          <option value="1">Individual</option>
+          <option value="2">2 Members</option>
+          <option value="3">3 Members</option>
+          <option value="4">4 Members</option>
+          <option value="5">5+ Members</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Team Members (if any)</label>
+        <textarea name="teamMembers" rows="3" placeholder="Enter names of team members separated by commas"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Project Description</label>
+        <textarea name="projectDescription" rows="4" placeholder="Brief description of your innovation, problem it solves, and unique features" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Special Requirements</label>
+        <input type="text" name="requirements" placeholder="Power outlets, table space, internet, etc.">
+      </div>
+
+      <button type="submit">Register for Innovation Expo</button>
+    </form>
+
+    <div class="back-link">
+      <a href="events.html">← Back to Events</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('innovationForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      
+      const formData = new FormData(this);
+      const registrationData = {
+        eventType: 'innovation_expo',
+        fullName: formData.get('fullName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        department: formData.get('department'),
+        year: formData.get('year'),
+        projectCategory: formData.get('projectCategory'),
+        projectTitle: formData.get('projectTitle'),
+        teamSize: formData.get('teamSize'),
+        teamMembers: formData.get('teamMembers'),
+        projectDescription: formData.get('projectDescription'),
+        requirements: formData.get('requirements'),
+        timestamp: new Date().toLocaleString()
+      };
+
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(registrationData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert('✅ Successfully registered for Innovation Expo 2025!');
+          this.reset();
+        } else {
+          alert('❌ Registration failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('❌ Registration failed. Please check your connection.');
+      }
+    });
+  </script>
+</body>
+</html>

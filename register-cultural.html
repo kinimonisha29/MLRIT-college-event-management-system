@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Cultural Fest</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #f0fff0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .form-container {
+      background: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #27ae60;
+      margin-bottom: 25px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #34495e;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ecf0f1;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #2ecc71;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #219a52;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .back-link a {
+      color: #27ae60;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Register for Cultural Fest</h2>
+    <form id="culturalForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="fullName" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label>Department</label>
+        <input type="text" name="department" required>
+      </div>
+      <div class="form-group">
+        <label>Event Category</label>
+        <select name="category" required>
+          <option value="">Select Category</option>
+          <option value="dance">Dance</option>
+          <option value="music">Music</option>
+          <option value="drama">Drama</option>
+          <option value="fine_arts">Fine Arts</option>
+          <option value="fashion">Fashion Show</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Performance Type</label>
+        <select name="performanceType" required>
+          <option value="">Select Type</option>
+          <option value="solo">Solo</option>
+          <option value="group">Group</option>
+          <option value="duet">Duet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Number of Participants</label>
+        <input type="number" name="participants" min="1" max="50" required>
+      </div>
+      <div class="form-group">
+        <label>Performance Duration (minutes)</label>
+        <input type="number" name="duration" min="1" max="15" required>
+      </div>
+      <div class="form-group">
+        <label>Special Requirements</label>
+        <textarea name="requirements" rows="3" placeholder="Music, props, stage setup, etc."></textarea>
+      </div>
+      <button type="submit">Register for Cultural Fest</button>
+    </form>
+    <div class="back-link">
+      <a href="events.html">← Back to Events</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('culturalForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      
+      const formData = new FormData(this);
+      const registrationData = {
+        eventType: 'cultural_fest',
+        fullName: formData.get('fullName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        department: formData.get('department'),
+        category: formData.get('category'),
+        performanceType: formData.get('performanceType'),
+        participants: formData.get('participants'),
+        duration: formData.get('duration'),
+        requirements: formData.get('requirements'),
+        timestamp: new Date().toLocaleString()
+      };
+
+      try {
+        const response = await fetch('http://localhost:3000/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(registrationData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert('✅ Successfully registered for Cultural Fest!');
+          this.reset();
+        } else {
+          alert('❌ Registration failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('❌ Registration failed. Please check your connection.');
+      }
+    });
+  </script>
+</body>
+</html>

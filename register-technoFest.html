@@ -1,0 +1,174 @@
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - TechnoFest</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .form-container {
+      background: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 25px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #34495e;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ecf0f1;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #c0392b;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .back-link a {
+      color: #3498db;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Register for TechnoFest 2025</h2>
+    <form id="technoFestForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="fullName" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label>Department</label>
+        <input type="text" name="department" required>
+      </div>
+      <div class="form-group">
+        <label>Year</label>
+        <select name="year" required>
+          <option value="">Select Year</option>
+          <option value="1">1st Year</option>
+          <option value="2">2nd Year</option>
+          <option value="3">3rd Year</option>
+          <option value="4">4th Year</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Events Participating</label>
+        <select name="events" multiple required>
+          <option value="hackathon">Hackathon</option>
+          <option value="paper_presentation">Paper Presentation</option>
+          <option value="robotics">Robotics</option>
+          <option value="coding_contest">Coding Contest</option>
+        </select>
+        <small>Hold Ctrl to select multiple events</small>
+      </div>
+      <div class="form-group">
+        <label>Team Name (if any)</label>
+        <input type="text" name="teamName">
+      </div>
+      <div class="form-group">
+        <label>Project Idea (brief)</label>
+        <textarea name="projectIdea" rows="3"></textarea>
+      </div>
+      <button type="submit">Register for TechnoFest</button>
+    </form>
+    <div class="back-link">
+      <a href="events.html">← Back to Events</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('technoFestForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      
+      const formData = new FormData(this);
+      const registrationData = {
+        eventType: 'technofest',
+        fullName: formData.get('fullName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        department: formData.get('department'),
+        year: formData.get('year'),
+        events: formData.get('events'),
+        teamName: formData.get('teamName'),
+        projectIdea: formData.get('projectIdea'),
+        timestamp: new Date().toLocaleString()
+      };
+
+      try {
+        const response = await fetch('http://localhost:3000/api/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(registrationData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert('✅ Successfully registered for TechnoFest 2025!');
+          this.reset();
+        } else {
+          alert('❌ Registration failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('❌ Registration failed. Please check your connection.');
+      }
+    });
+  </script>
+</body>
+</html>
